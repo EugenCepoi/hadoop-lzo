@@ -306,6 +306,18 @@
                 <condition property="native.ldflags" value="" else="-Wl,--no-as-needed">
                   <os family="mac"/>
                 </condition>
+                <condition property="native.libpath" value="/opt/local/lib" else="">
+                  <and>
+                    <available file="/opt/local/lib" />
+                    <os family="mac"/>
+                  </and>
+                </condition>
+                <condition property="native.includepath" value="/opt/local/include" else="">
+                  <and>
+                    <available file="/opt/local/include" />
+                    <os family="mac"/>
+                  </and>
+                </condition>
 
                 <mkdir dir="${build.native}/lib"/>
                 <mkdir dir="${build.native.target}/lib"/>
@@ -325,6 +337,8 @@
                   <env key="LDFLAGS" value="${native.ldflags}"/>
                   <env key="JVM_DATA_MODEL" value="${sun.arch.data.model}"/>
                   <env key="NATIVE_SRCDIR" value="${native.src.dir}"/>
+                  <env key="LIBRARY_PATH" value="${native.libpath}"/>
+                  <env key="C_INCLUDE_PATH" value="${native.includepath}"/>
                   <arg line="${native.src.dir}/configure"/>
                 </exec>
 
