@@ -318,6 +318,12 @@
                     <os family="mac"/>
                   </and>
                 </condition>
+                <condition property="native.includes" value="-I/opt/local/include" else="">
+                  <and>
+                    <available file="/opt/local/include" />
+                    <os family="mac"/>
+                  </and>
+                </condition>
 
                 <mkdir dir="${build.native}/lib"/>
                 <mkdir dir="${build.native.target}/lib"/>
@@ -347,6 +353,7 @@
                   <env key="OS_ARCH" value="${os.arch}"/>
                   <env key="JVM_DATA_MODEL" value="${sun.arch.data.model}"/>
                   <env key="HADOOP_NATIVE_SRCDIR" value="${native.src.dir}"/>
+                  <env key="INCLUDES" value="${native.includes}"/>
                 </exec>
 
                 <exec dir="${build.native}" executable="sh" failonerror="true">
